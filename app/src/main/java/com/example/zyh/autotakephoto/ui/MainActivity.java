@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zyh.autotakephoto.service.AutoCameraService;
+import com.example.zyh.autotakephoto.service.TimerService;
 import com.example.zyh.autotakephoto.view.CameraView;
 import com.example.zyh.autotakephoto.R;
 import com.sina.push.PushManager;
@@ -187,6 +188,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 serviceIntent.putExtra(CameraView.PICTURE_BYTES, faceBytes);
                 context.startService(serviceIntent);
             }
+        }
+    }
+
+
+    public class TimeBroadcastReceiver extends BroadcastReceiver {
+
+        public static final String ACTION = "com.example.zyh.autotakephoto.timereceiver";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            manager.refreshConnection();
+            //经过time之后pushManager重新连接.
+            int time = 1000 * 60 * 60;
+            TimerService.startTimerService(MainActivity.this, time);
         }
     }
 
