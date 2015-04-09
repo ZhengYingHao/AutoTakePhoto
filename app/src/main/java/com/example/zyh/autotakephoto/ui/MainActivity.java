@@ -53,6 +53,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private PushManager manager;
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

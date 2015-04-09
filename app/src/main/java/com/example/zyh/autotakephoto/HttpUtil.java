@@ -1,11 +1,15 @@
 package com.example.zyh.autotakephoto;
 
 
+import android.accounts.NetworkErrorException;
 import android.util.Log;
 
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
@@ -45,6 +49,7 @@ public class HttpUtil {
             //first boundary
             String firstBoundary = prefix + boundary + lineEnd;
 
+            String fileName = "" + "face.jpeg";
             //Encapsulated multipart part
             String contentDisposition = "Content-Disposition: form-data; name=\"file\"; filename=\"tface.jpeg\""
                     + lineEnd;
@@ -142,5 +147,93 @@ public class HttpUtil {
                 urlConnection.disconnect();
             }
         }
+    }
+
+
+    private static String sendDataToPath(String path, String name, String pd) throws NetworkErrorException{
+        int TIME_OUT = 1000 * 60;
+
+        HttpURLConnection urlConnection = null;
+        String boundary = UUID.randomUUID().toString();
+        String lineEnd = "\r\n", prefix = "--";
+        String content_type = "multipart/form-data";
+
+        InputStream in;
+
+        try {
+            URL url = new URL(path);
+            Log.i(TAG, "get url");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setConnectTimeout(TIME_OUT);
+            urlConnection.setReadTimeout(TIME_OUT);
+            urlConnection.setRequestProperty("Charset", CHARSET);
+            urlConnection.setRequestProperty("connection", "keep-alive");
+            urlConnection.setRequestProperty("Content-Type", content_type + ";boundary=" + boundary);
+
+            DataOutputStream out = new DataOutputStream(urlConnection.getOutputStream());
+
+            //first boundary
+            String firstBoundary = prefix + boundary + lineEnd;
+            //Encapsulated multipart part
+            String namePart = "Content-Disposition: form-data; name=\"name\""
+                    + lineEnd + lineEnd;
+            //middle boundary
+            String midBoundary = lineEnd + firstBoundary;
+            //Encapsulated multipart part
+            String pdPart = "Content-Disposition: form-data; name=\"password\""
+                    + lineEnd + lineEnd;
+            //last boundary
+            String lastBoundary = lineEnd + prefix + boundary + prefix + lineEnd;
+
+
+
+            out.write(firstBoundary.getBytes());
+            out.write(namePart.getBytes());
+            out.write(name.getBytes());
+            out.write(midBoundary.getBytes());
+            out.write(pdPart.getBytes());
+            out.write(pd.getBytes());
+            out.write(lastBoundary.getBytes());
+            out.flush();
+
+
+            in = urlConnection.getInputStream();
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                builder.append(line);
+            }
+
+            int response = urlConnection.getResponseCode();
+            if (response == 200) {
+                Log.i(TAG, "send data success.");
+            } else {
+                Log.i(TAG, "send data failed.");
+            }
+
+            return builder.toString();
+
+        } catch (IOException e) {
+            Log.i(TAG, "failed to open : " + e.toString());
+            throw new NetworkErrorException();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+    }
+
+    public static String isUser(String path, String name, String pd) throws NetworkErrorException {
+        return sendDataToPath(path, name, pd);
+    }
+
+    public static String register(String path, String name, String pd) throws NetworkErrorException {
+        return sendDataToPath(path, name, pd);
     }
 }

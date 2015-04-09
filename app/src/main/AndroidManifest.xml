@@ -31,14 +31,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+
 
         <service
             android:name=".service.AutoCameraService"
@@ -107,13 +112,14 @@
             android:permission="com.example.zyh.autotakephoto.permission.TIMER" >
             <intent-filter>
                 <action android:name="com.example.zyh.autotakephoto.timerservice" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
         <receiver
             android:name=".ui.MainActivity$TimeBroadcastReceiver"
-            android:permission="com.example.zyh.autotakephoto.permission.timereceiver">
+            android:permission="com.example.zyh.autotakephoto.permission.timereceiver" >
             <intent-filter>
                 <action android:name="com.example.zyh.autotakephoto.timereceiver" />
             </intent-filter>
