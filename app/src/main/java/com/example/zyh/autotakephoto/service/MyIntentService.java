@@ -17,7 +17,6 @@ public class MyIntentService extends android.app.IntentService {
 
     private static final String TAG = "DetectorIntentService";
 
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_Detect = "com.example.zyh.autotakephoto.action.Detect";
     private static final String ACTION_SENDAID = "com.example.zyh.autotakephoto.action.sendaid";
 

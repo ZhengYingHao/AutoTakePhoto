@@ -22,19 +22,23 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.example.zyh.autotakephoto.permission.SINA_PUSH" />
 
+    <!--不知道干嘛用的，获得权限吗？-->
     <permission
         android:name="com.example.zyh.autotakephoto.permission.SINA_PUSH"
         android:protectionLevel="normal" />
+    <permission android:name="com.example.zyh.autotakephoto.permission.AUTO_CAMERA"
+        android:protectionLevel="normal" />
 
-
+    <!--application 改为 TAApplication -->
     <application
+        android:name="com.ta.TAApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,8 +50,15 @@
             android:label="@string/app_name" >
         </activity>
 
+        <!--thinkAndroid 的接收器-->
+        <receiver android:name="com.ta.util.netstate.TANetworkStateReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
 
         <service
+            android:permission="com.example.zyh.autotakephoto.permission.AUTO_CAMERA"
             android:name=".service.AutoCameraService"
             android:enabled="true"
             android:exported="true" >

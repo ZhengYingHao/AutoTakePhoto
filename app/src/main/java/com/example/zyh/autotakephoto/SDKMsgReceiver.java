@@ -57,7 +57,7 @@ public class SDKMsgReceiver extends BroadcastReceiver {
 
                 if (actResult.getResultCode() == 1) {
                     // 打开通道成功，可以正常接收Push和调用接口功能
-
+                    Log.i(TAG, "msg channel has been builded.");
                 }
 
                 Log.i(TAG, "" + msg_type + "build channel.");

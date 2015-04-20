@@ -16,8 +16,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
     public static final String TAG = "CameraView";
     private SurfaceHolder holder;
     private Camera camera;
-    private Camera.Parameters parameters;
-    private BitmapFactory.Options options;
     private byte[] faceBytes;
 
     public CameraView(Context context) {
@@ -57,8 +55,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
         try {
             camera = Camera.open();
             camera.setPreviewDisplay(holder);
-            parameters = camera.getParameters();
-            parameters.setFocusMode("auto");
+            camera.getParameters().setFocusMode("auto");
         } catch (Exception e) {
             Log.e(TAG, "failed to open.");
         }
@@ -86,9 +83,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
     }
 
 
-
-
-
+    /**
+     * 记录拍照后得到的相片数据
+     */
     @Override
     public void onPictureTaken(byte[] bytes, Camera camera) {
         Log.i(TAG, "have taken.");

@@ -4,19 +4,15 @@ package com.example.zyh.autotakephoto.face;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.util.Log;
 
 import com.faceplusplus.api.FaceDetecter;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 public class Detector extends FaceDetecter {
 
     private static final String TAG = "Detector";
     private static final String API_KEY = "83dd3331b7cddfa06894b79522a8ab77";
-    private static final String API_SECRET = "W6hJUXALeeCDln-jI5tT3mZaOwestyBg";
+//    private static final String API_SECRET = "W6hJUXALeeCDln-jI5tT3mZaOwestyBg";
 
 
     private static BitmapFactory.Options options;
