@@ -49,6 +49,7 @@ public class AutoCameraService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        //如果是自己启动自己，则要发送本地广播；否则，处理传入的照片数据
         if (START_OWNSELF.equals(intent.getStringExtra(START_OWNSELF))) {
             Intent i = new Intent(MainActivity.AlarmReceiver.ACTION_RECEIVE_ALARM);
             if (broadcastManager != null)
@@ -76,15 +77,9 @@ public class AutoCameraService extends Service {
     }
 
 
-
-
-
-
-
-
-
-
-
+    /**
+     * 每隔3s启动
+     */
     private void makeAlarm() {
         AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);
         int aSecond = 1000 * 3;

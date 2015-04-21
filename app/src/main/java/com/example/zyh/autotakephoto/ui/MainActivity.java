@@ -114,7 +114,7 @@ public class MainActivity extends TAActivity implements View.OnClickListener {
 
 
     /**
-     * 接受AutoCameraService发送过来的广播，
+     * 接受 AutoCameraService 发送过来的广播，并将拍照后的数据传入 AutoCameraService 。
      */
     public class AlarmReceiver extends BroadcastReceiver {
         public static final String TAG = "AlarmReceiver";
