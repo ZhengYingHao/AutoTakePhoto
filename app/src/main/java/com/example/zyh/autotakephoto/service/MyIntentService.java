@@ -9,8 +9,10 @@ import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
 import com.example.zyh.autotakephoto.face.Detector;
 import com.faceplusplus.api.FaceDetecter;
+import com.ta.util.http.AsyncHttpClient;
+import com.ta.util.http.RequestParams;
 
-
+import java.io.ByteArrayInputStream;
 
 
 public class MyIntentService extends android.app.IntentService {
@@ -81,6 +83,13 @@ public class MyIntentService extends android.app.IntentService {
              * 至于开线程, 是因为有时上传速度慢, 会影响 handleActionDetect 的运行(压根儿不出来).
              */
             final byte[] bytes = faceBytes;
+
+            //新增的上传模块，没测试
+            RequestParams params = new RequestParams();
+            params.put("file", new ByteArrayInputStream(bytes));
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post(this, getString(R.string.uploadFile), params, null);
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
