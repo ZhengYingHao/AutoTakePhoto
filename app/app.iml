@@ -91,6 +91,7 @@
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="faceppsdk" level="project" />
     <orderEntry type="library" exported="" name="faceppofflinesdk" level="project" />
+    <orderEntry type="library" exported="" name="thinkandroid-1.1-bin" level="project" />
   </component>
 </module>
 

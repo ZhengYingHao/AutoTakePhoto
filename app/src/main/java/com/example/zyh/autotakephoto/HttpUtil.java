@@ -46,7 +46,7 @@ public class HttpUtil {
             //first boundary
             String firstBoundary = prefix + boundary + lineEnd;
 
-            String fileName = "" + "face.jpeg";
+//            String fileName = "" + "face.jpeg";
             //Encapsulated multipart part
             String contentDisposition = "Content-Disposition: form-data; name=\"file\"; filename=\"tface.jpeg\""
                     + lineEnd;
