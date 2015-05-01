@@ -7,9 +7,11 @@ import android.widget.Toast;
 
 import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
+import com.example.zyh.autotakephoto.UserInfo;
 import com.example.zyh.autotakephoto.face.Detector;
 import com.faceplusplus.api.FaceDetecter;
 import com.ta.util.http.AsyncHttpClient;
+import com.ta.util.http.AsyncHttpResponseHandler;
 import com.ta.util.http.RequestParams;
 
 import java.io.ByteArrayInputStream;
@@ -77,25 +79,45 @@ public class MyIntentService extends android.app.IntentService {
             Log.i(TAG, "yep, you are person.");
             Toast.makeText(this, "get face.", Toast.LENGTH_LONG).show();
             /**
-             * 5s一张照片的速度足够识别，甚至仅需更少的时间。
+             * 3s一张照片的速度足够识别，甚至仅需更少的时间。
              * 问题是uploadData这里需要的时间长(应该是reader.readLing()要等服务器响应，偏偏服务器不知道干嘛滴很慢）
              *
              * 至于开线程, 是因为有时上传速度慢, 会影响 handleActionDetect 的运行(压根儿不出来).
              */
-            final byte[] bytes = faceBytes;
+//            final byte[] bytes = faceBytes;
+
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    HttpUtil.uploadData(getString(R.string.uploadFile), bytes);
+//                }
+//            }).start();
+
 
             //新增的上传模块，没测试
+            // 成功上传了！！！
+            String userId = UserInfo.getUserInfo().getUserId();
             RequestParams params = new RequestParams();
-            params.put("file", new ByteArrayInputStream(bytes));
+            //上传: 文件
+            params.put("file", new ByteArrayInputStream(faceBytes), userId + ".jpeg", "image/jpeg");
+            //上传: userId
+            params.put("userId", userId);
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(this, getString(R.string.uploadFile), params, null);
-
-            new Thread(new Runnable() {
+            client.setTimeout(100000);
+            client.post(this, getString(R.string.uploadFile), params, new AsyncHttpResponseHandler() {
                 @Override
-                public void run() {
-                    HttpUtil.uploadData(getString(R.string.uploadFile), bytes);
+                public void onSuccess(String content) {
+                    super.onSuccess(content);
+                    Log.i(TAG, content);
                 }
-            }).start();
+                @Override
+                public void onFailure(Throwable error, String content) {
+                    super.onFailure(error, content);
+                    Log.i(TAG, content);
+                }
+            });
+
+            Log.i(TAG, "length: " + faceBytes.length);
         } else {
             Log.i(TAG, "no one here.");
         }
