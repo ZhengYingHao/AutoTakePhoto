@@ -39,6 +39,10 @@ public class LoginActivity extends TAActivity implements View.OnClickListener{
         registerBtn.setOnClickListener(this);
 
         loadUserInfo();
+
+        if (hasLogin()) {
+            MainActivity.start(LoginActivity.this);
+        }
     }
 
     private void init() {
@@ -63,18 +67,15 @@ public class LoginActivity extends TAActivity implements View.OnClickListener{
         params.put(UserInfo.NAME, name);
         params.put(UserInfo.PASSWORD, pd);
 
+        AsyncHttpClient client;
         switch (v.getId()) {
             case R.id.loginBtn:
-                if (hasLogin()) {
-                    MainActivity.start(LoginActivity.this);
-                } else {
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    client.post(getString(R.string.checkUserUrl), params,
-                            new UserDataAsyncHttpResponseHandler(name));
-                }
+                client = new AsyncHttpClient();
+                client.post(getString(R.string.checkUserUrl), params,
+                        new UserDataAsyncHttpResponseHandler(name));
                 break;
             case R.id.registerBtn:
-                AsyncHttpClient client = new AsyncHttpClient();
+                client = new AsyncHttpClient();
                 client.post(getString(R.string.registerUrl), params,
                         new UserDataAsyncHttpResponseHandler(name));
                 break;
