@@ -38,4 +38,16 @@ public class BitmapUtil {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
         return out.toByteArray();
     }
+
+    /**
+     * 将 bytes 转换为 bitmap
+     * @param bytes 脸部字节数据
+     * @return bytes 不为 null 则返回 bitmap
+     */
+//    public static Bitmap bytesToBitmap(byte[] bytes) {
+//        if (bytes == null) {
+//            return null;
+//        }
+//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+//    }
 }
