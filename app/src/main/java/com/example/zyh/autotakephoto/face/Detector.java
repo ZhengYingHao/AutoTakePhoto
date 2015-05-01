@@ -35,20 +35,15 @@ public class Detector extends FaceDetecter {
     }
 
 
-    private Bitmap bytesToBitmap(byte[] bytes) {
-        if (bytes == null) {
-            return null;
-        }
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-    }
-
-
+    /**
+     * 传入脸部字节数据检测是否有人脸
+     * @param bytes 脸部字节数据
+     * @return 若能检测到人脸则返回人脸数据
+     */
     public Face[] findFaces(byte[] bytes) {
         Log.i(TAG, "findFaces.");
-        Bitmap bitmap = bytesToBitmap(bytes);
-        if (bitmap != null)
-            return super.findFaces(bitmap);
-        else
-            return null;
+        if (bytes == null) return null;
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+        return (bitmap == null ? null : super.findFaces(bitmap));
     }
 }
