@@ -25,15 +25,19 @@ public class AutoCameraService extends Service {
     public AutoCameraService() {
     }
 
+    public static void startable() {
+        isStartService = true;
+    }
 
+    public synchronized static void stop() {
+        isStartService = false;
+    }
 
 
     @Override
     public void onCreate() {
         super.onCreate();
         broadcastManager = LocalBroadcastManager.getInstance(this);
-        //将true在一开始就赋值给isStartService，因为只有加载此类时才赋值。
-//        isStartService = true;
     }
 
 
@@ -55,9 +59,11 @@ public class AutoCameraService extends Service {
             if (broadcastManager != null)
                 broadcastManager.sendBroadcast(i);
         } else {
-            Log.i(TAG, "give bytes.");
-            byte[] bytes = intent.getByteArrayExtra(CameraView.PICTURE_BYTES);
-            MyIntentService.startActionDetect(this, bytes);
+            if (isStartService) {
+                Log.i(TAG, "give bytes.");
+                byte[] bytes = intent.getByteArrayExtra(CameraView.PICTURE_BYTES);
+                MyIntentService.startActionDetect(this, bytes);
+            }
             makeAlarm();
         }
 
@@ -78,7 +84,7 @@ public class AutoCameraService extends Service {
 
 
     /**
-     * 每隔3s启动
+     * 每隔3s启动service（自己），service（自己）发送广播去截图，截图后广播又启动service（自己）
      */
     private void makeAlarm() {
         AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -89,10 +95,6 @@ public class AutoCameraService extends Service {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
     }
-
-
-
-
 
 
     public static boolean getStartService() {
