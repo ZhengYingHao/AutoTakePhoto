@@ -22,14 +22,14 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.example.zyh.autotakephoto.permission.SINA_PUSH" />
 
-    <!--不知道干嘛用的，获得权限吗？-->
     <permission
         android:name="com.example.zyh.autotakephoto.permission.SINA_PUSH"
         android:protectionLevel="normal" />
-    <permission android:name="com.example.zyh.autotakephoto.permission.AUTO_CAMERA"
+    <permission
+        android:name="com.example.zyh.autotakephoto.permission.AUTO_CAMERA"
         android:protectionLevel="normal" />
 
-    <!--application 改为 TAApplication -->
+    <!-- application 改为 TAApplication -->
     <application
         android:name="com.ta.TAApplication"
         android:allowBackup="true"
@@ -50,7 +50,17 @@
             android:label="@string/app_name" >
         </activity>
 
-        <!--thinkAndroid 的接收器-->
+        <!-- 网络状态接收器，断网时不检测，检测也没用嘛-->
+        <receiver
+            android:name=".broadcast.receiver.NetStateReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- thinkAndroid 的接收器 -->
         <receiver android:name="com.ta.util.netstate.TANetworkStateReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -58,10 +68,10 @@
         </receiver>
 
         <service
-            android:permission="com.example.zyh.autotakephoto.permission.AUTO_CAMERA"
             android:name=".service.AutoCameraService"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true"
+            android:permission="com.example.zyh.autotakephoto.permission.AUTO_CAMERA" >
         </service>
         <service
             android:name=".service.MyIntentService"
@@ -137,7 +147,6 @@
                 <action android:name="com.example.zyh.autotakephoto.timereceiver" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
