@@ -1,4 +1,4 @@
-ï»¿package com.example.zyh.autotakephoto.broadcast.receiver;
+package com.example.zyh.autotakephoto.broadcast.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,7 +18,7 @@ public class NetStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         /**
-         * èƒ½è”ç½‘ï¼Œå¯ä»¥å¼€å¯æˆªå›¾æœåŠ¡ï¼Œå¦åˆ™åœæ­¢ã€‚
+         * ÄÜÁªÍø£¬¿ÉÒÔ¿ªÆô½ØÍ¼·şÎñ£¬·ñÔòÍ£Ö¹¡£
          */
         ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = manager.getActiveNetworkInfo();
@@ -30,5 +30,5 @@ public class NetStateReceiver extends BroadcastReceiver {
             AutoCameraService.stop();
         }
     }
-
+    
 }
