@@ -123,7 +123,7 @@ public class MainActivity extends TAActivity implements View.OnClickListener {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            if (AutoCameraService.getStartService()) {
+//            if (AutoCameraService.getStartService()) {
                 Log.i(AlarmReceiver.TAG, "start service from receiver.");
                 cameraView.takePicture();
 
@@ -137,7 +137,7 @@ public class MainActivity extends TAActivity implements View.OnClickListener {
                 Intent serviceIntent = new Intent(context, AutoCameraService.class);
                 serviceIntent.putExtra(CameraView.PICTURE_BYTES, faceBytes);
                 context.startService(serviceIntent);
-            }
+//            }
         }
     }
 
