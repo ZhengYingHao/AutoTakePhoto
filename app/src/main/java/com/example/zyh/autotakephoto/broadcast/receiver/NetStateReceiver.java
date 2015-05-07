@@ -30,5 +30,5 @@ public class NetStateReceiver extends BroadcastReceiver {
             AutoCameraService.stop();
         }
     }
-    
+
 }
