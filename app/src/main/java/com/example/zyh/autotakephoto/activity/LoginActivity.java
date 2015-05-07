@@ -6,13 +6,17 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
 import com.example.zyh.autotakephoto.UserInfo;
+import com.example.zyh.autotakephoto.broadcast.receiver.NetStateReceiver;
 import com.ta.util.http.AsyncHttpClient;
 import com.ta.util.http.AsyncHttpResponseHandler;
 import com.ta.util.http.RequestParams;
@@ -50,10 +54,17 @@ public class LoginActivity extends MTAActivity implements View.OnClickListener{
         loginBtn = (Button)findViewById(R.id.loginBtn);
         registerBtn = (Button)findViewById(R.id.registerBtn);
         hintTv = (TextView)findViewById(R.id.hintTv);
+
+        //初始化网络状态
+        NetStateReceiver.initNetworkState(LoginActivity.this);
     }
 
     @Override
     public void onClick(View v) {
+        if (NetStateReceiver.networkInfo == null || !NetStateReceiver.networkInfo.isAvailable()) {
+            Toast.makeText(LoginActivity.this, "未连接网络", Toast.LENGTH_LONG).show();
+            return ;
+        }
         String name = userNameText.getText().toString();
         String pd = passwordText.getText().toString();
 
@@ -115,14 +126,27 @@ public class LoginActivity extends MTAActivity implements View.OnClickListener{
      */
     private class UserDataAsyncHttpResponseHandler extends AsyncHttpResponseHandler {
         private String name;
+        private ProgressBar bar;
         public UserDataAsyncHttpResponseHandler(String name) {
             super();
             this.name = name;
         }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+            params.height = 100;
+            params.width = 100;
+            bar = new ProgressBar(LoginActivity.this);
+            getWindowManager().addView(bar, params);
+        }
+
         @Override
         public void onSuccess(String content) {
             super.onSuccess(content);
             Log.i(TAG, content);
+            getWindowManager().removeView(bar);
             if (!HttpUtil.WRONG_USER_NAME_OR_PASSWORD_INFO.equals(content)) {
                 storageInSharedPreference(name, content);
 
