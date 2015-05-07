@@ -66,7 +66,7 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
     private void init() {
         Button stopBtn = (Button)findViewById(R.id.reconnect_btn);
         cameraView = (CameraView)findViewById(R.id.cameraView);
-        aidTextView = (TextView)findViewById(R.id.aid_text_view);
+//        aidTextView = (TextView)findViewById(R.id.aid_text_view);
 
         stopBtn.setOnClickListener(this);
     }
