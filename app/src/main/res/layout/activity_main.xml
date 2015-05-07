@@ -19,6 +19,14 @@
             android:layout_height="300dp"
             android:layout_centerInParent="true" />
 
+        <Button
+            android:id="@+id/reconnect_btn"
+            android:text="@string/main_reconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cameraView"
+            android:layout_centerInParent="true"
+            />
     </RelativeLayout>
 
     <include layout="@layout/actionbar_bottom"/>
