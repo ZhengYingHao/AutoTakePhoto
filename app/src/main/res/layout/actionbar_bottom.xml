@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/head_background">
+
+    <TextView
+        android:id="@+id/detector"
+        android:text="@string/actionbar_bottom_detector"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="@dimen/actionbar_text_size"
+        android:gravity="center"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/statistics"
+        android:text="@string/actionbar_bottom_statistics"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="@dimen/actionbar_text_size"
+        android:gravity="center"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/setup"
+        android:text="@string/actionbar_bottom_setup"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="@dimen/actionbar_text_size"
+        android:gravity="center"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>
