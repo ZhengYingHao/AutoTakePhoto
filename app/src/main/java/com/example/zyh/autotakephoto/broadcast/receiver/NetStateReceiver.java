@@ -12,6 +12,8 @@ import com.example.zyh.autotakephoto.service.AutoCameraService;
 public class NetStateReceiver extends BroadcastReceiver {
     public static final String TAG = "NetStateReceiver";
     public static NetworkInfo networkInfo = null;
+    private static ConnectivityManager connectivityManager = null;
+
     public NetStateReceiver() {
     }
 
@@ -20,8 +22,7 @@ public class NetStateReceiver extends BroadcastReceiver {
         /**
          * 能联网，可以开启截图服务，否则停止。
          */
-        ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        networkInfo = manager.getActiveNetworkInfo();
+        networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isAvailable()) {
             Log.i(TAG, "is available.");
             AutoCameraService.startable();
@@ -31,4 +32,8 @@ public class NetStateReceiver extends BroadcastReceiver {
         }
     }
 
+    public static void initNetworkState(Context context) {
+        connectivityManager= (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+    }
 }
