@@ -9,7 +9,7 @@ import android.os.SystemClock;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.example.zyh.autotakephoto.ui.MainActivity;
+import com.example.zyh.autotakephoto.activity.MainActivity;
 import com.example.zyh.autotakephoto.view.CameraView;
 
 public class AutoCameraService extends Service {

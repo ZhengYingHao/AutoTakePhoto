@@ -37,7 +37,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
         </activity>
 
@@ -130,18 +130,8 @@
             android:name="sinapush_appid"
             android:value="22225" />
 
-        <service
-            android:name=".service.TimerService"
-            android:permission="com.example.zyh.autotakephoto.permission.TIMER" >
-            <intent-filter>
-                <action android:name="com.example.zyh.autotakephoto.timerservice" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
-
         <receiver
-            android:name=".ui.MainActivity$TimeBroadcastReceiver"
+            android:name=".activity.MainActivity$TimeBroadcastReceiver"
             android:permission="com.example.zyh.autotakephoto.permission.timereceiver" >
             <intent-filter>
                 <action android:name="com.example.zyh.autotakephoto.timereceiver" />

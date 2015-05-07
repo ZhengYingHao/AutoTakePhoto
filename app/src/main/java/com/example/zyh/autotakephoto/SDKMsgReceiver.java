@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.zyh.autotakephoto.service.MyIntentService;
-import com.example.zyh.autotakephoto.ui.MainActivity;
+import com.example.zyh.autotakephoto.activity.MainActivity;
 import com.sina.push.MPSConsts;
 import com.sina.push.model.ActionResult;
 import com.sina.push.response.PushDataPacket;
