@@ -18,7 +18,7 @@ public class NetStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         /**
-         * ÄÜÁªÍø£¬¿ÉÒÔ¿ªÆô½ØÍ¼·şÎñ£¬·ñÔòÍ£Ö¹¡£
+         * èƒ½è”ç½‘ï¼Œå¯ä»¥å¼€å¯æˆªå›¾æœåŠ¡ï¼Œå¦åˆ™åœæ­¢ã€‚
          */
         ConnectivityManager manager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = manager.getActiveNetworkInfo();
