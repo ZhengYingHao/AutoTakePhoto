@@ -1,7 +1,9 @@
 package com.example.zyh.autotakephoto.activity;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zyh.autotakephoto.BitmapUtil;
+import com.example.zyh.autotakephoto.activity.tools.ActivityCollector;
 import com.example.zyh.autotakephoto.service.AutoCameraService;
 import com.example.zyh.autotakephoto.view.CameraView;
 import com.example.zyh.autotakephoto.R;
@@ -31,8 +34,6 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
 
     public static final String APPID = "22225";
 
-    public static TextView aidTextView;
-
     private LocalBroadcastManager localBroadcastManager;
 
     private AlarmReceiver alarmReceiver;
@@ -42,6 +43,7 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
     private static BitmapFactory.Options options;
 
     private PushManager manager;
+
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -59,16 +61,26 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         registerLocalReceiver();
 
 
-        startService(new Intent(this, AutoCameraService.class));
+//        startService(new Intent(this, AutoCameraService.class));
     }
 
 
     private void init() {
-        Button stopBtn = (Button)findViewById(R.id.reconnect_btn);
-        cameraView = (CameraView)findViewById(R.id.cameraView);
-//        aidTextView = (TextView)findViewById(R.id.aid_text_view);
+        TextView detectorTv, statisticsTv, setupTv, quitTv;
+        Button reconnectBtn = (Button)findViewById(R.id.reconnect_btn);
 
-        stopBtn.setOnClickListener(this);
+        cameraView = (CameraView)findViewById(R.id.cameraView);
+
+        quitTv = (TextView)findViewById(R.id.tv_quit);
+//        detectorTv = (TextView)findViewById(R.id.detector);
+//        statisticsTv = (TextView)findViewById(R.id.statistics);
+//        setupTv = (TextView)findViewById(R.id.setup);
+//
+        reconnectBtn.setOnClickListener(this);
+//        quitTv.setOnClickListener(this);
+//        detectorTv.setOnClickListener(this);
+//        statisticsTv.setOnClickListener(this);
+//        setupTv.setOnClickListener(this);
     }
 
 
@@ -84,6 +96,25 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.reconnect_btn:
                 manager.refreshConnection();
+                break;
+            case R.id.detector:
+                break;
+            case R.id.statistics:
+                break;
+            case R.id.setup:
+                break;
+            case R.id.tv_quit:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("退出警告");
+                dialog.setMessage("确认退去？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCollector.finishAll();
+                    }
+                });
+                dialog.show();
                 break;
         }
     }
