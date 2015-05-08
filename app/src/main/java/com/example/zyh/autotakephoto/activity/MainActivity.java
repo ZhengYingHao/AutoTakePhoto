@@ -61,7 +61,7 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         registerLocalReceiver();
 
 
-//        startService(new Intent(this, AutoCameraService.class));
+        startService(new Intent(this, AutoCameraService.class));
     }
 
 
@@ -72,15 +72,15 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         cameraView = (CameraView)findViewById(R.id.cameraView);
 
         quitTv = (TextView)findViewById(R.id.tv_quit);
-//        detectorTv = (TextView)findViewById(R.id.detector);
-//        statisticsTv = (TextView)findViewById(R.id.statistics);
-//        setupTv = (TextView)findViewById(R.id.setup);
-//
+        detectorTv = (TextView)findViewById(R.id.detector);
+        statisticsTv = (TextView)findViewById(R.id.statistics);
+        setupTv = (TextView)findViewById(R.id.setup);
+
         reconnectBtn.setOnClickListener(this);
-//        quitTv.setOnClickListener(this);
-//        detectorTv.setOnClickListener(this);
-//        statisticsTv.setOnClickListener(this);
-//        setupTv.setOnClickListener(this);
+        quitTv.setOnClickListener(this);
+        detectorTv.setOnClickListener(this);
+        statisticsTv.setOnClickListener(this);
+        setupTv.setOnClickListener(this);
     }
 
 
@@ -112,6 +112,12 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ActivityCollector.finishAll();
+                    }
+                });
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
                     }
                 });
                 dialog.show();
