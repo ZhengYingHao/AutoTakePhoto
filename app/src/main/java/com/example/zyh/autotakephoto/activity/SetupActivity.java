@@ -2,6 +2,7 @@ package com.example.zyh.autotakephoto.activity;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,10 @@ import com.ta.util.http.AsyncHttpResponseHandler;
 import com.ta.util.http.RequestParams;
 
 public class SetupActivity extends MTAActivity implements View.OnClickListener{
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, SetupActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +55,14 @@ public class SetupActivity extends MTAActivity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.backTv:
+                //TODO : debug
+                /**
+                 * 会直接全部退出
+                 */
                 finish();
                 break;
             case R.id.logoutBtn:
-                UserInfo.destroyUserInfo();
+                UserInfo.destroyUserInfo(SetupActivity.this);
                 //LoginActivity 是 singleTask 模式，会直接销毁在它之上的活动
                 startActivity(new Intent(SetupActivity.this, LoginActivity.class));
                 break;
