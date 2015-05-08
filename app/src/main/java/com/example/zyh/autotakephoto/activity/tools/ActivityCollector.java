@@ -10,7 +10,7 @@ public class ActivityCollector {
     public synchronized static void addActivity(Activity a) {
         activities.add(a);
     }
-    public synchronized static void removeActivity(Activity a) {
+    public static void removeActivity(Activity a) {
         activities.remove(a);
     }
     public synchronized static void finishAll() {

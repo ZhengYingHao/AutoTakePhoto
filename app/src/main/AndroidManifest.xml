@@ -37,6 +37,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:launchMode="singleTask"
             android:name=".activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -50,7 +51,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <!-- 网络状态接收器，断网时不检测，检测也没用嘛-->
+        <!-- 网络状态接收器，断网时不检测，检测也没用嘛 -->
         <receiver
             android:name=".broadcast.receiver.NetStateReceiver"
             android:enabled="true"
@@ -130,13 +131,21 @@
             android:name="sinapush_appid"
             android:value="22225" />
 
-        <receiver
-            android:name=".activity.MainActivity$TimeBroadcastReceiver"
-            android:permission="com.example.zyh.autotakephoto.permission.timereceiver" >
-            <intent-filter>
-                <action android:name="com.example.zyh.autotakephoto.timereceiver" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver-->
+            <!--android:name=".activity.MainActivity$TimeBroadcastReceiver"-->
+            <!--android:permission="com.example.zyh.autotakephoto.permission.timereceiver" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.example.zyh.autotakephoto.timereceiver" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <activity
+            android:name=".activity.StatisticsActivity"
+            >
+        </activity>
+        <activity
+            android:name=".activity.SetupActivity">
+        </activity>
     </application>
 
 </manifest>
