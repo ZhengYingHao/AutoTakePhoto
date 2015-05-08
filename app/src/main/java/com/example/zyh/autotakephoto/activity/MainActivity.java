@@ -101,8 +101,10 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
                 manager.refreshConnection();
                 break;
             case R.id.statistics:
+                StatisticsActivity.start(MainActivity.this);
                 break;
             case R.id.setup:
+                SetupActivity.start(MainActivity.this);
                 break;
             case R.id.tv_quit:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
