@@ -50,7 +50,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <!-- 网络状态接收器，断网时不检测，检测也没用嘛-->
+        <!-- 网络状态接收器，断网时不检测，检测也没用嘛 -->
         <receiver
             android:name=".broadcast.receiver.NetStateReceiver"
             android:enabled="true"
@@ -137,6 +137,14 @@
                 <action android:name="com.example.zyh.autotakephoto.timereceiver" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".activity.StatisticsActivity"
+            >
+        </activity>
+        <activity
+            android:name=".activity.SetupActivity">
+        </activity>
     </application>
 
 </manifest>
