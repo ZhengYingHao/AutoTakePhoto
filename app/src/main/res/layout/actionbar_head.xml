@@ -5,7 +5,7 @@
     android:background="@color/head_background">
     <TextView
         android:id="@+id/backTv"
-        android:text="  < "
+        android:text="back"
         android:textSize="@dimen/actionbar_text_size"
         android:textColor="@color/textColor"
         android:layout_alignParentLeft="true"
