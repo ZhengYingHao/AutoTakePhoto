@@ -65,8 +65,6 @@ public class SDKMsgReceiver extends BroadcastReceiver {
 
             case MPSConsts.MSG_TYPE_SAE_DATA:
                 String aid = intent.getStringExtra(MPSConsts.KEY_MSG_SAE_DATA);
-                if (MainActivity.aidTextView != null)
-                    MainActivity.aidTextView.setText(aid);
                 MyIntentService.startSendAidService(context, aid);
                 Log.i(TAG, "" + msg_type + "sae data.");
                 break;
