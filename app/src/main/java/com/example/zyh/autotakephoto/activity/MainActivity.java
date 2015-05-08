@@ -66,21 +66,24 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
 
 
     private void init() {
-        TextView detectorTv, statisticsTv, setupTv, quitTv;
+        TextView statisticsTv, setupTv, quitTv;
         Button reconnectBtn = (Button)findViewById(R.id.reconnect_btn);
 
         cameraView = (CameraView)findViewById(R.id.cameraView);
 
         quitTv = (TextView)findViewById(R.id.tv_quit);
-        detectorTv = (TextView)findViewById(R.id.detector);
         statisticsTv = (TextView)findViewById(R.id.statistics);
         setupTv = (TextView)findViewById(R.id.setup);
 
         reconnectBtn.setOnClickListener(this);
         quitTv.setOnClickListener(this);
-        detectorTv.setOnClickListener(this);
         statisticsTv.setOnClickListener(this);
         setupTv.setOnClickListener(this);
+
+        /**
+         * 设置Title
+         */
+        ((TextView)findViewById(R.id.title)).setText(getString(R.string.actionbar_bottom_detector));
     }
 
 
@@ -96,8 +99,6 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.reconnect_btn:
                 manager.refreshConnection();
-                break;
-            case R.id.detector:
                 break;
             case R.id.statistics:
                 break;
