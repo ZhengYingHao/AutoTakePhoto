@@ -5,17 +5,15 @@
     android:background="@color/head_background">
     <TextView
         android:id="@+id/backTv"
-        android:text="back"
+        android:background="@drawable/arrow180"
         android:textSize="@dimen/actionbar_text_size"
         android:textColor="@color/textColor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:visibility="gone"
         />
-
     <TextView
         android:id="@+id/title"
         android:textSize="30sp"
@@ -25,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textStyle="bold"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/tv_quit"
@@ -34,6 +33,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="match_parent" />
 </RelativeLayout>
