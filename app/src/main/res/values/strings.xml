@@ -11,6 +11,7 @@
 
     <string name="checkUserUrl">http://watchhome.sinaapp.com/login.php</string>
     <string name="registerUrl">http://watchhome.sinaapp.com/register.php</string>
+    <string name="clearAllDataUrl">http://watchhome.sinaapp.com/clearalldata.php</string>
 
     <string name="errorLogin">用户名或者密码错误</string>
     <string name="login">Login</string>
@@ -30,4 +31,7 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <string name="activity_setup_logout">注销</string>
+    <string name="activity_setup_clear_all_data">删除所有记录</string>
 </resources>

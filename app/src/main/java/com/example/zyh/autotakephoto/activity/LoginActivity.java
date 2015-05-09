@@ -1,6 +1,6 @@
 package com.example.zyh.autotakephoto.activity;
 
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
-import com.example.zyh.autotakephoto.UserInfo;
+import com.example.zyh.autotakephoto.model.UserInfo;
 import com.example.zyh.autotakephoto.broadcast.receiver.NetStateReceiver;
 import com.ta.util.http.AsyncHttpClient;
 import com.ta.util.http.AsyncHttpResponseHandler;
@@ -114,9 +114,14 @@ public class LoginActivity extends MTAActivity implements View.OnClickListener{
         public void onStart() {
             super.onStart();
             WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+            params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                    | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
             params.height = 100;
             params.width = 100;
             bar = new ProgressBar(LoginActivity.this);
+            bar.setBackgroundColor(Color.TRANSPARENT);
             getWindowManager().addView(bar, params);
         }
 
