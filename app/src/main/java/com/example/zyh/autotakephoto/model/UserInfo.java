@@ -1,4 +1,4 @@
-package com.example.zyh.autotakephoto;
+package com.example.zyh.autotakephoto.model;
 
 
 import android.content.Context;
