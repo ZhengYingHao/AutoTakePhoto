@@ -96,8 +96,4 @@ public class AutoCameraService extends Service {
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
     }
 
-
-    public static boolean getStartService() {
-        return isStartService;
-    }
 }
