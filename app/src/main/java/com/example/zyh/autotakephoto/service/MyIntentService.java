@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
-import com.example.zyh.autotakephoto.UserInfo;
+import com.example.zyh.autotakephoto.model.UserInfo;
 import com.example.zyh.autotakephoto.face.Detector;
 import com.faceplusplus.api.FaceDetecter;
 import com.ta.util.http.AsyncHttpClient;
@@ -15,6 +15,8 @@ import com.ta.util.http.AsyncHttpResponseHandler;
 import com.ta.util.http.RequestParams;
 
 import java.io.ByteArrayInputStream;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 
 public class MyIntentService extends android.app.IntentService {
@@ -84,17 +86,7 @@ public class MyIntentService extends android.app.IntentService {
              *
              * 至于开线程, 是因为有时上传速度慢, 会影响 handleActionDetect 的运行(压根儿不出来).
              */
-//            final byte[] bytes = faceBytes;
 
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    HttpUtil.uploadData(getString(R.string.uploadFile), bytes);
-//                }
-//            }).start();
-
-
-            //新增的上传模块，没测试
             // 成功上传了！！！
             String userId = UserInfo.getUserInfo().getUserId();
             RequestParams params = new RequestParams();
@@ -102,6 +94,17 @@ public class MyIntentService extends android.app.IntentService {
             params.put("file", new ByteArrayInputStream(faceBytes), userId + ".jpeg", "image/jpeg");
             //上传: userId
             params.put("userId", userId);
+
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            //对应 MySQL 的 datetime 格式。
+            Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
+            params.put("year", "" + year);
+            params.put("month", "" + month);
+            params.put("date", timestamp.toString());
+            Log.i(TAG, "date: " + timestamp);
+
             AsyncHttpClient client = new AsyncHttpClient();
             client.setTimeout(100000);
             client.post(this, getString(R.string.uploadFile), params, new AsyncHttpResponseHandler() {
@@ -125,6 +128,7 @@ public class MyIntentService extends android.app.IntentService {
     }
 
     private void handleActionSendAid(String aid) {
+        //TODO:
         HttpUtil.uploadString(getString(R.string.updateAid), aid);
     }
 
