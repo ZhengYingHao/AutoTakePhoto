@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zyh.autotakephoto.R;
-import com.example.zyh.autotakephoto.UserInfo;
+import com.example.zyh.autotakephoto.model.UserInfo;
 import com.ta.util.http.AsyncHttpClient;
 import com.ta.util.http.AsyncHttpResponseHandler;
 import com.ta.util.http.RequestParams;
