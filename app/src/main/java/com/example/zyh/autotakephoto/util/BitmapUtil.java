@@ -1,4 +1,4 @@
-package com.example.zyh.autotakephoto;
+package com.example.zyh.autotakephoto.util;
 
 
 import android.graphics.Bitmap;
