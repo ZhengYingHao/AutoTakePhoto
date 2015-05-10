@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.zyh.autotakephoto.HttpUtil;
 import com.example.zyh.autotakephoto.R;
 import com.example.zyh.autotakephoto.model.UserInfo;
 import com.example.zyh.autotakephoto.face.Detector;
@@ -19,6 +18,11 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 
+/**
+ * 线程处理：
+ *  face的上传
+ *  aid的上传
+ */
 public class MyIntentService extends android.app.IntentService {
 
     private static final String TAG = "DetectorIntentService";
@@ -77,6 +81,7 @@ public class MyIntentService extends android.app.IntentService {
         Log.i(TAG, "handleActionDetect.");
         Detector myDetector = new Detector(this, true);
         FaceDetecter.Face[] faces = myDetector.findFaces(faceBytes);
+        myDetector.release(this);
         if (faces != null) {
             Log.i(TAG, "yep, you are person.");
             Toast.makeText(this, "get face.", Toast.LENGTH_LONG).show();
@@ -124,12 +129,12 @@ public class MyIntentService extends android.app.IntentService {
         } else {
             Log.i(TAG, "no one here.");
         }
-        myDetector.release(this);
     }
 
     private void handleActionSendAid(String aid) {
-        //TODO:
-        HttpUtil.uploadString(getString(R.string.updateAid), aid);
+        RequestParams params = new RequestParams();
+        params.put("aid", aid);
+        new AsyncHttpClient().post(this, getString(R.string.updateAid), params, new AsyncHttpResponseHandler());
     }
 
 }
