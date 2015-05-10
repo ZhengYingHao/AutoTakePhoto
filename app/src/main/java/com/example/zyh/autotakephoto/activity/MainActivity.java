@@ -16,7 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.zyh.autotakephoto.BitmapUtil;
+import com.example.zyh.autotakephoto.util.BitmapUtil;
 import com.example.zyh.autotakephoto.activity.tools.ActivityCollector;
 import com.example.zyh.autotakephoto.service.AutoCameraService;
 import com.example.zyh.autotakephoto.view.CameraView;
@@ -83,7 +83,7 @@ public class MainActivity extends MTAActivity implements View.OnClickListener {
         /**
          * 设置Title
          */
-        ((TextView)findViewById(R.id.title)).setText(getString(R.string.actionbar_bottom_detector));
+        ((TextView)findViewById(R.id.action_bar_head_title)).setText(getString(R.string.actionbar_bottom_detector));
     }
 
 
