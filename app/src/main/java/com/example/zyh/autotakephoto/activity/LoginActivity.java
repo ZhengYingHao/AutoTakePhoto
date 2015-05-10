@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zyh.autotakephoto.HttpUtil;
+import com.example.zyh.autotakephoto.util.HttpUtil;
 import com.example.zyh.autotakephoto.R;
 import com.example.zyh.autotakephoto.model.UserInfo;
 import com.example.zyh.autotakephoto.broadcast.receiver.NetStateReceiver;
