@@ -102,7 +102,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
             camera.autoFocus(null);
             camera.takePicture(null, null, this);
         } catch (Exception e) {
-            Toast.makeText(getContext(), "something wrong with camera.", Toast.LENGTH_LONG).show();
             if (camera != null)
                 camera.release();
         }

@@ -45,7 +45,7 @@ public class UserInfo {
         editor.putString(UserInfo.USER_ID, userId);
         editor.apply();
         getUserInfo().name = name;
-        getUserInfo().userId = userId;
+        getUserInfo().setUserId(userId);
     }
 
     /**
