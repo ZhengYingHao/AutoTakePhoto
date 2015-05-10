@@ -31,7 +31,6 @@
 
     <!-- application 改为 TAApplication -->
     <application
-        android:name="com.ta.TAApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -104,7 +103,7 @@
         </receiver>
 
         <!-- 声明使用SinaPushSDK 接收透传消息的广播事件 -->
-        <receiver android:name=".SDKMsgReceiver" >
+        <receiver android:name=".broadcast.receiver.SDKMsgReceiver" >
             <intent-filter>
                 <action android:name="com.sina.push.msg.broadcast.22225" />
             </intent-filter>

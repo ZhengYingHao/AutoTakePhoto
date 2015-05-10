@@ -1,4 +1,4 @@
-package com.example.zyh.autotakephoto;
+package com.example.zyh.autotakephoto.broadcast.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
