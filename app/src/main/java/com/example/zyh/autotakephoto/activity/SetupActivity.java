@@ -12,10 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zyh.autotakephoto.R;
+import com.example.zyh.autotakephoto.dao.DateDataDao;
+import com.example.zyh.autotakephoto.dao.impl.DateDataDaoImpl;
 import com.example.zyh.autotakephoto.model.UserInfo;
-import com.ta.util.http.AsyncHttpClient;
-import com.ta.util.http.AsyncHttpResponseHandler;
-import com.ta.util.http.RequestParams;
 
 public class SetupActivity extends MTAActivity implements View.OnClickListener{
 
@@ -36,16 +35,16 @@ public class SetupActivity extends MTAActivity implements View.OnClickListener{
         TextView titleTv, backTv;
         Button logoutBtn, clearAllDataBtn;
 
-        titleTv = (TextView)findViewById(R.id.title);
+        titleTv = (TextView)findViewById(R.id.action_bar_head_title);
         backTv = (TextView)findViewById(R.id.backTv);
-        findViewById(R.id.tv_quit).setVisibility(View.GONE);
-
         logoutBtn = (Button)findViewById(R.id.logoutBtn);
         clearAllDataBtn = (Button)findViewById(R.id.clearAllDataBtn);
 
-        titleTv.setText(getString(R.string.actionbar_bottom_statistics));
-
         backTv.setVisibility(View.VISIBLE);
+        findViewById(R.id.tv_quit).setVisibility(View.GONE);
+
+        titleTv.setText(getString(R.string.actionbar_bottom_setup));
+
         backTv.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
         clearAllDataBtn.setOnClickListener(this);
@@ -55,10 +54,6 @@ public class SetupActivity extends MTAActivity implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.backTv:
-                //TODO : debug
-                /**
-                 * 会直接全部退出
-                 */
                 finish();
                 break;
             case R.id.logoutBtn:
@@ -74,12 +69,8 @@ public class SetupActivity extends MTAActivity implements View.OnClickListener{
                 dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String userId = UserInfo.getUserInfo().getUserId();
-                        RequestParams params = new RequestParams();
-                        params.put("userId", userId);
-                        AsyncHttpClient client = new AsyncHttpClient();
-                        client.post(SetupActivity.this, getString(R.string.clearAllDataUrl), params,
-                                new AsyncHttpResponseHandler());
+                        DateDataDaoImpl impl = new DateDataDaoImpl(SetupActivity.this);
+                        impl.deleteDateData(DateDataDao.DELETE_ALL, DateDataDao.DEFAULT_ID);
                     }
                 });
                 dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
