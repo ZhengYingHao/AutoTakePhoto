@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/head_background">
-    <TextView
+    <Button
+        style="?android:buttonBarButtonStyle"
         android:id="@+id/backTv"
         android:background="@drawable/arrow180"
         android:textSize="@dimen/actionbar_text_size"
@@ -13,9 +14,10 @@
         android:gravity="center"
         android:layout_width="50dp"
         android:layout_height="match_parent"
+        android:visibility="gone"
         />
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/action_bar_head_title"
         android:textSize="30sp"
         android:textColor="@color/textColor"
         android:layout_centerInParent="true"
@@ -23,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textStyle="bold"
-        android:visibility="gone"
         />
     <TextView
         android:id="@+id/tv_quit"
